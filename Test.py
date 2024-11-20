@@ -43,14 +43,14 @@ def get_dat(message):
 @bot.callback_query_handler(func=lambda call: True)
 def callback_worker(call):
     if call.data == "yes":
-        bot.send_message(call.message.chat.id, 'Запомню : )')
+        bot.send_message(call.message.chat.id, 'Данные в БД')
         cursor.execute('INSERT INTO TESTINGBOT (STR1TEST, STR2TEST) values(?, ?)', grz, FIO_customer)
         cnxn.commit()
     elif call.data == "no":
         keyboard = types.ReplyKeyboardMarkup()
         key_again = types.KeyboardButton('/reg')
         keyboard.add(key_again)
-        question = 'Начнем с начала : )'
+        question = 'Начнем с начала'
         bot.send_message(call.from_user.id, text=question, reply_markup=keyboard)
 
 bot.polling(none_stop=True, interval=0)
